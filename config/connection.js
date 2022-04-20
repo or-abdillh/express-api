@@ -1,15 +1,15 @@
 'use strict'
   
-require('dotenv').config()
 const { Sequelize } = require('sequelize')
+const db = require('./database.js')
 
 const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
+    db.name,
+    db.userName,
+    db.password,
     {
-        host: process.env.DB_HOST,
-        dialect: 'mysql' 
+        host: db.hostName,
+        dialect: db.dialect 
     }
 )
 
