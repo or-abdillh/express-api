@@ -1,35 +1,67 @@
 'use strict'
 
 const User = require('../models/User.js')
-const query = require('../../helpers/query.js')
+const response = require('../../helpers/response.js')
 
 const UserController = {
 
-    async createUser(form) {
+    async index(req, res) {
+        try {
+            const users = await User.findAll({
+                attributes: {
+                    exclude: [ 'updatedAt', 'createdAt' ]
+                }
+            })
+            response.success(users, res)
+        } catch(err) {
+            response.internalServerError(err, res)
+        }
+    },
+
+    async createUser(req, res) {
         //parsing form
-        const { username, fullname, address } = form
+        const { username, fullname, address } = req.body
         
-        //Instance new User
-        const user = new User({
-            username,
-            fullname,
-            address
-        })
-            
         //Create new user
         try {
-            await user.save()
-            console.log('new user success to create')
+            await User.create({ username, fullname, address })
+            response.success(`Success for create user : ${username}`, res)
         } catch(err) {
-            console.log('Something error: \n', err.name)
+            response.internalServerError(err, res)
+        }
+    },
+
+    async removeUser(req, res) {
+        //Get unique key
+        const { key } = req.body
+            
+        try {
+            await User.destroy({
+                where: {
+                    username: key
+                }
+            })
+            response.success(`Success remove ${key} from table`, res)
+        } catch(err) {
+            response.internalServerError(err, res)
+        }
+    },
+
+    async updateUser(req, res) {
+        //Parse form
+        const { key, username, fullname, address } = req.body
+            
+        try {
+            await User.update({ username, fullname, address }, {
+                where: {
+                    username: key
+                }
+            })
+            response.success(`Succes to update data for ${key}`, res)
+        } catch(err) {
+            response.internalServerError(err, res)
         }
     }
 }
-
-UserController.createUser({
-    fullname: 'Atiya',
-    username: 'atiya404',
-    address: 'handil pandan'
-})
 
 module.exports = UserController
