@@ -26,6 +26,4 @@ User.init({
     modelName: 'User'
 })
 
-User.sync()
-
 module.exports = User
