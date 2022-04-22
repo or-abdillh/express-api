@@ -1,6 +1,6 @@
 'use strict'
 
-const User = require('../models/User.js')
+const User = require('../models/user.js')
 const response = require('../../helpers/response.js')
 
 const UserController = {

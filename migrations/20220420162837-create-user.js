@@ -20,7 +20,7 @@ module.exports = {
         allowNull: true,
         defaultValue: 'st. freedom of jhon'
       },
-    });
+    })
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Users');
