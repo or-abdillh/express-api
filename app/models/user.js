@@ -2,6 +2,8 @@
 
 const { DataTypes, Model } = require('sequelize')
 const sequelize = require('../../config/connection.js')
+const article = require('./article.js')
+const Article = article(sequelize, DataTypes)
 
 class User extends Model {  }
 
@@ -27,5 +29,7 @@ User.init({
     createdAt: true,
     updatedAt: true
 })
+
+User.hasMany(Article, { foreignKey: 'username' })
 
 module.exports = User
