@@ -23,7 +23,9 @@ User.init({
     }
 }, {
     sequelize,
-    modelName: 'User'
+    modelName: 'User',
+    createdAt: true,
+    updatedAt: true
 })
 
 module.exports = User

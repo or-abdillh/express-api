@@ -2,18 +2,6 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('Users', [
-      {
-        username: 'hans2340',
-        fullname: 'Oka R. Abdillah',
-        address: 'Handil Bakti'
-      },
-      {
-        username: 'mina1234',
-        fullname: 'Mina Fitria',
-        address: 'Anjir Pasar'
-      }
-    ])
     /**
      * Add seed commands here.
      *
@@ -23,6 +11,23 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+
+    await queryInterface.bulkInsert('Users', [
+      {
+        username: 'hans2340',
+        fullname: 'Oka R. Abdillah',
+        address: 'Handil Bakti',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        username: 'mina1234',
+        fullname: 'Mina Fitria',
+        address: 'Anjir Pasar',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+    ])
   },
 
   async down (queryInterface, Sequelize) {

@@ -20,6 +20,14 @@ module.exports = {
         allowNull: true,
         defaultValue: 'st. freedom of jhon'
       },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+      }
     })
   },
   async down(queryInterface, Sequelize) {
